@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MVCWebProject.Models.DB.ItemInventory>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Shop</h1>
+
+<form asp-controller="ItemShop" asp-action="PurchaseFunction" method="get">
+    <p>
+        Item Name: <input type="text" name="ItemName" />
+        Quantity: <input type="text" name="Quantity" />
+        <input type="submit" value="Purchase" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

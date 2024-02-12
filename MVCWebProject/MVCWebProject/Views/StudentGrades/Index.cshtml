@@ -1,0 +1,72 @@
+﻿@model IEnumerable<MVCWebProject.Models.DB.StudentGrade>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Student Grades</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@*input grades and student name - calls azure function through mvc*@
+<form asp-controller="AzureCaller" asp-action="getStudentGrade" method="get">
+    <p>
+        Student Name: <input type="text" name="StudentName" size="17" />
+        mark 1: <input type="text" name="m1" size="5"/>
+        mark 2: <input type="text" name="m2" size="5" />
+        mark 3: <input type="text" name="m3" size="5"/>
+        mark 4: <input type="text" name="m4" size="5" />
+        <input type="submit" value="calculate" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.M1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.M2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.M3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.M4)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.M1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.M2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.M3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.M4)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.StudentId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.StudentId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.StudentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

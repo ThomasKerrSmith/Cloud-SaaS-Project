@@ -1,0 +1,65 @@
+﻿@model IEnumerable<MVCWebProject.Models.DB.ItemInventory>
+
+@{
+    ViewData["Title"] = "CategoryFilter";
+}
+
+<h1>Inventory</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-controller="ItemInventories" asp-action="ItemSearch" method="get">
+    <p>
+        Enter Item Name: <input type="text" name="ItemName" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
+<form asp-controller="ItemInventories" asp-action="CategoryFilter" method="get">
+    <p>
+        Enter Category: <input type="text" name="Category" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ItemID">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ItemID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
